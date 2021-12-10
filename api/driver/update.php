@@ -1,0 +1,39 @@
+<?php 
+  // Headers
+  header('Access-Control-Allow-Origin: *');
+  header('Content-Type: application/json');
+  header('Access-Control-Allow-Methods: PUT');
+  header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
+  include_once '../../config/Database.php';
+  include_once '../../models/Driver.php';
+
+  // Instantiate DB & connect
+  $database = new Database();
+  $db = $database->connect();
+
+  // Instantiate blog post object
+  $driver = new Driver($db);
+
+  // Get raw posted data
+  $data = json_decode(file_get_contents("php://input"));
+
+  // Set ID to update
+  $driver->id = $data->id;
+
+  $driver->name = $data->name;
+  $driver->surname = $data->surname;
+  $driver->pesel = $data->pesel;
+  $driver->hourlyRate = $data->hourlyRate;
+
+  // Update post
+  if($driver->update()) {
+    echo json_encode(
+      array('message' => 'Driver Updated')
+    );
+  } else {
+    echo json_encode(
+      array('message' => 'Driver Not Updated')
+    );
+  }
+
