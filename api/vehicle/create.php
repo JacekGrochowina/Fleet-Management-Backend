@@ -6,31 +6,35 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Driver.php';
+  include_once '../../models/Vehicle.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $driver = new Driver($db);
+  $vehicle = new Vehicle($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $driver->name = $data->name;
-  $driver->surname = $data->surname;
-  $driver->pesel = $data->pesel;
-  $driver->hourlyRate = $data->hourlyRate;
+  $vehicle->brand = $data->brand;
+  $vehicle->model = $data->model;
+  $vehicle->yearManufacture = $data->yearManufacture;
+  $vehicle->vin = $data->vin;
+  $vehicle->fuelType = $data->fuelType;
+  $vehicle->registrationNumber = $data->registrationNumber;
+  $vehicle->avgFuelConsumption = $data->avgFuelConsumption;
+  $vehicle->vehicleType = $data->vehicleType;
 
-  // Create driver
-  if($driver->create()) {
+  // Create post
+  if($vehicle->create()) {
     echo json_encode(
-      array('message' => 'Driver Created')
+      array('message' => 'Vehicle Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Driver Not Created')
+      array('message' => 'Vehicle Not Created')
     );
   }
 

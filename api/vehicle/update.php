@@ -6,34 +6,38 @@
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Driver.php';
+  include_once '../../models/Vehicle.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $driver = new Driver($db);
+  $vehicle = new Vehicle($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to update
-  $driver->id = $data->id;
+  $vehicle->id = $data->id;
 
-  $driver->name = $data->name;
-  $driver->surname = $data->surname;
-  $driver->pesel = $data->pesel;
-  $driver->hourlyRate = $data->hourlyRate;
+  $vehicle->brand = $data->brand;
+  $vehicle->model = $data->model;
+  $vehicle->yearManufacture = $data->yearManufacture;
+  $vehicle->vin = $data->vin;
+  $vehicle->fuelType = $data->fuelType;
+  $vehicle->registrationNumber = $data->registrationNumber;
+  $vehicle->avgFuelConsumption = $data->avgFuelConsumption;
+  $vehicle->vehicleType = $data->vehicleType;
 
-  // Update driver
-  if($driver->update()) {
+  // Update vehicle
+  if($vehicle->update()) {
     echo json_encode(
-      array('message' => 'Driver Updated')
+      array('message' => 'Vehicle Updated')
     );
   } else {
     echo json_encode(
-      array('message' => 'Driver Not Updated')
+      array('message' => 'Vehicle Not Updated')
     );
   }
 

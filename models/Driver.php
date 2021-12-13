@@ -47,11 +47,11 @@
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Set properties
-        $this->category_name = $row['id'];
-        $this->title = $row['name'];
-        $this->body = $row['surname'];
-        $this->author = $row['pesel'];
-        $this->category_id = $row['hourlyRate'];
+        $this->id = $row['id'];
+        $this->name = $row['name'];
+        $this->surname = $row['surname'];
+        $this->pesel = $row['pesel'];
+        $this->hourlyRate = $row['hourlyRate'];
     }
 
     // Create Driver

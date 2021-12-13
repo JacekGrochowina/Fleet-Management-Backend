@@ -1,6 +1,6 @@
 ## Tabele
 
-#### Drivers (kierowcy)
+#### Drivers (kierowcy) - TBTRA_KIEROWCY
 
 | Parametr     | Typ      | Opis                      |
 | :----------- | :------- | :------------------------ |
@@ -10,7 +10,7 @@
 | `pesel`      | `string` | Numer pesel kierowcy      |
 | `hourlyRate` | `string` | Stawka godzinowa kierowcy |
 
-#### Vehicles (pojazdy)
+#### Vehicles (pojazdy) - TBTRA_POJAZDY
 
 | Parametr             | Typ      | Opis                        |
 | :------------------- | :------- | :-------------------------- |
@@ -24,7 +24,7 @@
 | `avgFuelConsumption` | `string` | Średnie spalanie pojazdu    |
 | `vehicleType`        | `string` | Typ pojazdu                 |
 
-#### Routes (trasy)
+#### Routes (trasy) - TBTRA_TRASY
 
 | Parametr             | Typ       | Opis                           |
 | :------------------- | :-------- | :----------------------------- |

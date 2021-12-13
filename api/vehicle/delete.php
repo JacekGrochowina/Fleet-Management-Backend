@@ -2,35 +2,33 @@
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: POST');
+  header('Access-Control-Allow-Methods: DELETE');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Driver.php';
+  include_once '../../models/Vehicle.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate blog post object
-  $driver = new Driver($db);
+  $vehicle = new Vehicle($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $driver->name = $data->name;
-  $driver->surname = $data->surname;
-  $driver->pesel = $data->pesel;
-  $driver->hourlyRate = $data->hourlyRate;
+  // Set ID to update
+  $vehicle->id = $data->id;
 
-  // Create driver
-  if($driver->create()) {
+  // Delete vehicle
+  if($vehicle->delete()) {
     echo json_encode(
-      array('message' => 'Driver Created')
+      array('message' => 'Vehicle Deleted')
     );
   } else {
     echo json_encode(
-      array('message' => 'Driver Not Created')
+      array('message' => 'Vehicle Not Deleted')
     );
   }
 
