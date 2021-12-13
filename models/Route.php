@@ -3,6 +3,8 @@
     // DB stuff
     private $conn;
     private $table = 'TBTRA_TRASY';
+    private $tableDriver = 'TBTRA_KIEROWCY';
+    private $tableVehicle = 'TBTRA_POJAZDY';
 
     // Post Properties
     public $id;
@@ -29,7 +31,12 @@
     // Get Routes
     public function read() {
         // Create query
-        $query = 'SELECT id, vehicle, driver, dateStart, dateFinish, placeStart, placeFinish, loadType, lengthRoute, fuelCosts, expeditionTime, driverSalary, profitExpedition, incomeExpedition, expensesExpedition FROM ' . $this->table ;
+        $query = 'SELECT ' . $this->table . '.*, ' . $this->tableDriver . '.*, ' . $this->tableVehicle . '.*' .
+            ' FROM ' . $this->table . 
+            ' LEFT JOIN ' . $this->tableDriver . 
+            ' ON ' . $this->table . '.driver=' . $this->tableDriver . '.id' .
+            ' LEFT JOIN ' . $this->tableVehicle . 
+            ' ON ' . $this->table . '.vehicle=' . $this->tableVehicle . '.id';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -43,7 +50,7 @@
     // Get Single Route
     public function read_single() {
         // Create query
-        $query = 'SELECT id, vehicle, driver, dateStart, dateFinish, placeStart, placeFinish, loadType, lengthRoute, fuelCosts, expeditionTime, driverSalary, profitExpedition, incomeExpedition, expensesExpedition WHERE p.id = ? LIMIT 0,1';
+        $query = 'SELECT ' . $this->table . '.* FROM ' . $this->table . ' WHERE p.id = ? LIMIT 0,1';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);

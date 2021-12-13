@@ -29,8 +29,24 @@
 
       $route_item = array(
         'id' => $id,
-        'vehicle' => $vehicle,
-        'driver' => $driver,
+        'vehicle' => array(
+          'id' => $id,
+          'brand' => $brand,
+          'model' => $model,
+          'yearManufacture' => $yearManufacture,
+          'vin' => $vin,
+          'fuelType' => $fuelType,
+          'registrationNumber' => $registrationNumber,
+          'avgFuelConsumption' => $avgFuelConsumption,
+          'vehicleType' => $vehicleType,
+        ),
+        'driver' => array(
+          'id' => $id,
+          'name' => $name,
+          'surname' => $surname,
+          'pesel' => $pesel,
+          'hourlyRate' => $hourlyRate
+        ),
         'dateStart' => $dateStart,
         'dateFinish' => $dateFinish,
         'placeStart' => $placeStart,
